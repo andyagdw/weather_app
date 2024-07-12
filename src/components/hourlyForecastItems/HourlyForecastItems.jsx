@@ -50,7 +50,7 @@ export default function HourlyForecastItems({ weatherData, isCelsius }) {
       } else {
         let updatedCurrentHour = currentHour + count;
         recent = updatedCurrentHour;
-        let hourData = hourlyForecastTodayData.at(recent);
+        let hourData = hourlyForecastTodayData.at(count);
         let hour = hourlyForecastTodayData.indexOf(hourData);
         weatherDataNext12Hours.push({
           hour: hour,
