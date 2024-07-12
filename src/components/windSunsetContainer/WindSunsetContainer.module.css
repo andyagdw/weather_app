@@ -1,0 +1,4 @@
+.colContainerSunset {
+    background-image: linear-gradient(to bottom, #fff 90%, rgb(75, 75, 255));
+    opacity: 0.9;
+}

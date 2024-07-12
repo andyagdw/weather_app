@@ -1,0 +1,9 @@
+.weatherHeadings {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+}
+
+.colContainer {
+    background-color: #fff;
+    opacity: 0.9;
+}
