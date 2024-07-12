@@ -17,34 +17,28 @@ export default function HourlyForecastItems({ weatherData, isCelsius }) {
     const hourlyForecastTodayData = todayData.hour  // An array of the hourly forecast
     const tomorrowData = weatherData.forecast.forecastday[1]
     const hourlyForecastTomorrowData = tomorrowData.hour  // An array of tomorrows hourly forecast
+    
 
     for (let i = 0; i < numOfItemsToShow; i++) {
-      if (recent > 22) {
-        // If recent is 23 (23:00pm), start again from 0 (00:00am)
+      if (recent > 22) {  // If recent is 23 (23:00pm), start again from 0 (00:00am)
         if (!firstTime) {
           count++;
           let hourData = hourlyForecastTomorrowData.at(count);
           let hour = hourlyForecastTomorrowData.indexOf(hourData);
-          weatherDataNext12Hours.push({
-            hour: hour,
-            temp: isCelsius
-              ? Math.round(hourData.temp_c)
-              : Math.round(hourData.temp_f),
-            icon: hourData.condition.icon,
-            time: hourData.time,
-          });
+          weatherDataNext12Hours.push(
+            {
+              hour: hour, temp: isCelsius ? Math.round(hourData.temp_c) : Math.round(hourData.temp_f), icon: hourData.condition.icon, time: hourData.time,
+            }
+          );
         } else {
           count = 0;
           let hourData = hourlyForecastTomorrowData.at(count);
           let hour = hourlyForecastTomorrowData.indexOf(hourData);
-          weatherDataNext12Hours.push({
-            hour: hour,
-            temp: isCelsius
-              ? Math.round(hourData.temp_c)
-              : Math.round(hourData.temp_f),
-            icon: hourData.condition.icon,
-            time: hourData.time,
-          });
+          weatherDataNext12Hours.push(
+            {
+              hour: hour, temp: isCelsius ? Math.round(hourData.temp_c) : Math.round(hourData.temp_f), icon: hourData.condition.icon, time: hourData.time,
+            }
+          );
           firstTime = false;
         }
       } else {
@@ -52,14 +46,11 @@ export default function HourlyForecastItems({ weatherData, isCelsius }) {
         recent = updatedCurrentHour;
         let hourData = hourlyForecastTodayData.at(count);
         let hour = hourlyForecastTodayData.indexOf(hourData);
-        weatherDataNext12Hours.push({
-          hour: hour,
-          temp: isCelsius
-            ? Math.round(hourData.temp_c)
-            : Math.round(hourData.temp_f),
-          icon: hourData.condition.icon,
-          time: hourData.time,
-        });
+        weatherDataNext12Hours.push(
+          {
+            hour: hour, temp: isCelsius ? Math.round(hourData.temp_c) : Math.round(hourData.temp_f), icon: hourData.condition.icon, time: hourData.time,
+          }
+        );
         count++;
       }
     }
@@ -70,7 +61,7 @@ export default function HourlyForecastItems({ weatherData, isCelsius }) {
         let subArray = weatherDataNext12Hours.slice(i, i + 5);
         subArrays.push(subArray);
     }
-
+    
     return (
       <div className="row py-3">
           <div className="col-lg-12 colContainer">

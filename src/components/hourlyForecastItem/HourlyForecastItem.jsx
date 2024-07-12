@@ -1,5 +1,3 @@
-// import React from 'react'
-
 export default function HourlyForecastItem({ icon, temp, hour, isCelsius}) {
   return (
     <div className="d-inline-block">

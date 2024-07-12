@@ -44,7 +44,9 @@ export default function SearchBar({ cityName, search, setCityName, errorMessage 
                     {/* Display the below only if no city name was given */}
                     {noInput && !errorMessage && <p className="text-center text-danger">Please enter a valid city name</p>}
                     {/* For any errors */}
-                    {errorMessage && <p className="text-center text-danger">There was an error. Did you add your API key?</p>}
+                    {errorMessage && <p className="text-center text-danger">
+                        Error: Please check your API key, ensure the location is correct, or try again later.
+                        </p>}
                 </div>
             </div>
         </div>
