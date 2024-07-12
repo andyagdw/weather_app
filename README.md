@@ -24,7 +24,7 @@ To get started with the Weather App, follow these steps:
     `git clone https://github.com/andyagdw/weather_app.git`
 3. Navigate to the project directory: <br />
     `cd weather_app`
-4. Install dependencies:
+4. Install dependencies: <br />
     `npm install`
 5. Create an `.env` from the example template `.env.example`: <br />
     Windows: <br />
