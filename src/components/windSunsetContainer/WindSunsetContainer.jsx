@@ -12,10 +12,7 @@ export default function WindSunsetContainer({ weatherData }) {
           <div>Sunrise: {today.astro.sunrise} </div>
         </div>
         <p className="text-center py-4">
-          Powered by 
-          <a href="https://www.weatherapi.com/" title="Free Weather API">
-            WeatherAPI.com
-          </a>
+          Powered by <a href="https://www.weatherapi.com/" title="Free Weather API">WeatherAPI.com</a>
         </p>
       </div>
     </div>
