@@ -10,7 +10,7 @@ export default function HourlyForecastItems({ weatherData, isCelsius }) {
     const weatherDataNext12Hours = [];
     const currentHour = date.getHours();  // Get the current hour
     let count = 1; 
-    let recent = 0;  // Will be used to check when to move on to tomorrows data
+    let hoursAfterCurrentHourUpTo23 = 0;  // Will be used to check when to move on to tomorrows data
     let firstTime = true;  // If it is the first time iterating through tomorrows data
 
     const todayData = weatherData.forecast.forecastday[0]
@@ -20,7 +20,7 @@ export default function HourlyForecastItems({ weatherData, isCelsius }) {
     
 
     for (let i = 0; i < numOfItemsToShow; i++) {
-      if (recent > 22) {  // If recent is 23 (23:00pm), start again from 0 (00:00am)
+      if (hoursAfterCurrentHourUpTo23 > 22) {  // If hoursAfterCurrentHourUpTo23 is 23 (23:00pm), start again from 0 (00:00am)
         if (!firstTime) {
           count++;
           let hourData = hourlyForecastTomorrowData.at(count);
@@ -43,8 +43,8 @@ export default function HourlyForecastItems({ weatherData, isCelsius }) {
         }
       } else {
         let updatedCurrentHour = currentHour + count;
-        recent = updatedCurrentHour;
-        let hourData = hourlyForecastTodayData.at(count);
+        hoursAfterCurrentHourUpTo23 = updatedCurrentHour;
+        let hourData = hourlyForecastTodayData.at(hoursAfterCurrentHourUpTo23);
         let hour = hourlyForecastTodayData.indexOf(hourData);
         weatherDataNext12Hours.push(
           {

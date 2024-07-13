@@ -38,8 +38,12 @@ export default function App() {
         data.current.condition &&
         data.forecast &&
         data.forecast.forecastday &&
-        data.forecast.forecastday.length === 3
+        data.forecast.forecastday.length === 3 &&
+        data.forecast.forecastday[0].hour.length === 24 &&
+        data.forecast.forecastday[1].hour.length === 24
       ) {
+        console.log(data.forecast.forecastday[0].hour)
+        console.log(data.forecast.forecastday[1].hour)
         setWeatherData(data);
         setCityName("");
       }
