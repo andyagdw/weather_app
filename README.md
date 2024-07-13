@@ -14,6 +14,16 @@ between Celsius and Fahrenheit for their temperature readings.
 * **Temperature Information**: Get detailed temperature-related information including 'feels-like' temperature,
  average temperature, and the highest and lowest temperatures for the day.
 
+## The User Interface
+
+Searchbar:
+
+![Screenshot 2024-07-13 142531](https://github.com/user-attachments/assets/96a2dec1-3331-4253-8175-7cf55113dd1c)
+
+City Weather Information:
+
+![Screenshot 2024-07-13 142511](https://github.com/user-attachments/assets/b7947f83-06be-42e0-a94d-e3a15542def7)
+
 ## Getting Started ✅
 
 To get started with the Weather App, follow these steps:
