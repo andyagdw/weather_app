@@ -36,7 +36,8 @@ To get started with the Weather App, follow these steps:
     `cd weather_app`
 4. Install dependencies: <br />
     `npm install`
-5. Create an `.env` from the example template `.env.example`: <br />
+5. Create an `.env` from the example template `.env.example`:
+
     Windows: <br />
     `copy .env.example .env` <br />
     Unix\Mac: <br />
@@ -46,10 +47,10 @@ To get started with the Weather App, follow these steps:
 
     `VITE_WEATHER_API_KEY = 'ABCDE'`
  
-6. Start the development server: <br />
+7. Start the development server: <br />
     `npm run dev`
 
-7. Click on the link provided in the terminal to open the application in your browser 🚀.
+8. Click on the link provided in the terminal to open the application in your browser 🚀.
 
 ## Credits
 ### Contact
