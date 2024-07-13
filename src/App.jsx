@@ -23,8 +23,6 @@ export default function App() {
       const url = `https://weatherapi-com.p.rapidapi.com/forecast.json?q=${city}&days=3`;
       const response = await fetch(url, options);
 
-      // console.log(response)
-
       if (!response.ok) {  // Ensure that HTTP errors are caught and handled in the try block
         // Fetch function only throws an error if there is a network error. It ignores HTTP errors like 404 or 500
         throw new Error(`HTTP error! status: ${response.status}`);
@@ -42,8 +40,6 @@ export default function App() {
         data.forecast.forecastday[0].hour.length === 24 &&
         data.forecast.forecastday[1].hour.length === 24
       ) {
-        console.log(data.forecast.forecastday[0].hour)
-        console.log(data.forecast.forecastday[1].hour)
         setWeatherData(data);
         setCityName("");
       }

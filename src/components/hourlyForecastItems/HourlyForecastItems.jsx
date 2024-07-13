@@ -5,10 +5,11 @@ import HourlyForecastItem from '../hourlyForecastItem/HourlyForecastItem';
 
 export default function HourlyForecastItems({ weatherData, isCelsius }) {
 
-    const date = new Date();
     const numOfItemsToShow = 20;  // Number of hours to show in the carousel
     const weatherDataNext12Hours = [];
-    const currentHour = date.getHours();  // Get the current hour
+    const localTimeDateTimeParts = weatherData.location.localtime.split(" ")
+    const localTimeHoursMinutesParts = localTimeDateTimeParts[1].split(":");
+    const currentHour = +localTimeHoursMinutesParts[0];  // Store local time
     let count = 1; 
     let hoursAfterCurrentHourUpTo23 = 0;  // Will be used to check when to move on to tomorrows data
     let firstTime = true;  // If it is the first time iterating through tomorrows data
@@ -27,7 +28,10 @@ export default function HourlyForecastItems({ weatherData, isCelsius }) {
           let hour = hourlyForecastTomorrowData.indexOf(hourData);
           weatherDataNext12Hours.push(
             {
-              hour: hour, temp: isCelsius ? Math.round(hourData.temp_c) : Math.round(hourData.temp_f), icon: hourData.condition.icon, time: hourData.time,
+              hour: hour,
+              temp: isCelsius ? Math.round(hourData.temp_c) : Math.round(hourData.temp_f),
+              icon: hourData.condition.icon,
+              time: hourData.time,
             }
           );
         } else {
@@ -36,7 +40,10 @@ export default function HourlyForecastItems({ weatherData, isCelsius }) {
           let hour = hourlyForecastTomorrowData.indexOf(hourData);
           weatherDataNext12Hours.push(
             {
-              hour: hour, temp: isCelsius ? Math.round(hourData.temp_c) : Math.round(hourData.temp_f), icon: hourData.condition.icon, time: hourData.time,
+              hour: hour,
+              temp: isCelsius ? Math.round(hourData.temp_c) : Math.round(hourData.temp_f),
+              icon: hourData.condition.icon,
+              time: hourData.time,
             }
           );
           firstTime = false;
@@ -48,7 +55,10 @@ export default function HourlyForecastItems({ weatherData, isCelsius }) {
         let hour = hourlyForecastTodayData.indexOf(hourData);
         weatherDataNext12Hours.push(
           {
-            hour: hour, temp: isCelsius ? Math.round(hourData.temp_c) : Math.round(hourData.temp_f), icon: hourData.condition.icon, time: hourData.time,
+            hour: hour,
+            temp: isCelsius ? Math.round(hourData.temp_c) : Math.round(hourData.temp_f),
+            icon: hourData.condition.icon,
+            time: hourData.time,
           }
         );
         count++;
@@ -88,14 +98,18 @@ export default function HourlyForecastItems({ weatherData, isCelsius }) {
                     href="#carouselExampleControls"
                     role="button"
                     data-bs-slide="prev">
-                        <span><FontAwesomeIcon icon={faCircleArrowLeft} color='black' /></span>
+                        <span>
+                          <FontAwesomeIcon icon={faCircleArrowLeft} color='black' />
+                        </span>
                 </a>
                 <a 
                     className={["carousel-control-next", styles.arrowContainer].join(" ")}
                     href="#carouselExampleControls"
                     role="button"
                         data-bs-slide="next">
-                        <span><FontAwesomeIcon icon={faCircleArrowRight} color='black' /></span>
+                        <span>
+                          <FontAwesomeIcon icon={faCircleArrowRight} color='black' />
+                        </span>
                 </a>
             </div>
         </div>
