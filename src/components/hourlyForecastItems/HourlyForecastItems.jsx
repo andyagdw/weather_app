@@ -3,22 +3,36 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleArrowLeft, faCircleArrowRight } from '@fortawesome/free-solid-svg-icons';
 import HourlyForecastItem from '../hourlyForecastItem/HourlyForecastItem';
 
-export default function HourlyForecastItems({ weatherData, isCelsius }) {
+export default function HourlyForecastItems({ weatherData, isCelsius, setErrorMessage }) {
+
+    const localTime = weatherData.location.localtime ?? null;
+    const weatherDataForecastDayInfo = weatherData.forecast.forecastday ?? null;
+    const todayData = weatherDataForecastDayInfo[0] ?? null;
+    const hourlyForecastTodayData = todayData.hour ?? null // An array of the hourly forecast
+    const tomorrowData = weatherDataForecastDayInfo[1] ?? null;
+    const hourlyForecastTomorrowData = tomorrowData.hour ?? null // An array of tomorrows hourly forecast
+    
+  if (
+      !localTime ||
+      !weatherDataForecastDayInfo ||
+      !todayData ||
+      !hourlyForecastTodayData ||
+      hourlyForecastTodayData.length !== 24 ||
+      hourlyForecastTomorrowData.length !== 24 ||
+      !tomorrowData ||
+      !hourlyForecastTomorrowData
+    ) {
+      setErrorMessage(true)
+    }
 
     const numOfItemsToShow = 20;  // Number of hours to show in the carousel
     const weatherDataNext12Hours = [];
-    const localTimeDateTimeParts = weatherData.location.localtime.split(" ")
+    const localTimeDateTimeParts = localTime.split(" ");
     const localTimeHoursMinutesParts = localTimeDateTimeParts[1].split(":");
     const currentHour = +localTimeHoursMinutesParts[0];  // Store local time
     let count = 1; 
     let hoursAfterCurrentHourUpTo23 = 0;  // Will be used to check when to move on to tomorrows data
     let firstTime = true;  // If it is the first time iterating through tomorrows data
-
-    const todayData = weatherData.forecast.forecastday[0]
-    const hourlyForecastTodayData = todayData.hour  // An array of the hourly forecast
-    const tomorrowData = weatherData.forecast.forecastday[1]
-    const hourlyForecastTomorrowData = tomorrowData.hour  // An array of tomorrows hourly forecast
-    
 
     for (let i = 0; i < numOfItemsToShow; i++) {
       if (hoursAfterCurrentHourUpTo23 > 22) {  // If hoursAfterCurrentHourUpTo23 is 23 (23:00pm), start again from 0 (00:00am)

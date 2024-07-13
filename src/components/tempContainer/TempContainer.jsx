@@ -2,10 +2,33 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTemperatureThreeQuarters } from '@fortawesome/free-solid-svg-icons'
 import styles from './TempContainer.module.css'
 
-export default function TempContainer({ weatherData, isCelsius }) {
+export default function TempContainer({ weatherData, isCelsius, setErrorMessage }) {
+
+    const weatherDataForecastdayTodayDayInfo = weatherData.forecast.forecastday[0].day;
+    const maxTempC = weatherDataForecastdayTodayDayInfo.maxtemp_c ?? null;
+    const minTempC = weatherDataForecastdayTodayDayInfo.mintemp_c ?? null;
+    const maxTempF = weatherDataForecastdayTodayDayInfo.maxtemp_f ?? null;
+    const minTempF = weatherDataForecastdayTodayDayInfo.mintemp_f ?? null;
+    const avgTempC = weatherDataForecastdayTodayDayInfo.avgtemp_c ?? null;
+    const avgTempF = weatherDataForecastdayTodayDayInfo.avgtemp_f ?? null;
+
+    const weatherDataCurrentInfo = weatherData.current;
+    const feelslikeC = weatherDataCurrentInfo.feelslike_c ?? null;
+    const feelslikeF = weatherDataCurrentInfo.feelslike_f ?? null;
     
-    const today = weatherData.forecast.forecastday[0];
-    const avgTemp = isCelsius ? today.day.avgtemp_c : today.day.avgtemp_f;
+    if (
+      !weatherDataForecastdayTodayDayInfo ||
+      !maxTempC ||
+      !minTempC ||
+      !maxTempF ||
+      !minTempF ||
+      !avgTempC ||
+      !avgTempF ||
+      !feelslikeC ||
+      !feelslikeF
+    ) {
+      setErrorMessage(true)
+    }
 
   return (
     <div className="col-xl-5 border p-3 colContainer">
@@ -16,26 +39,26 @@ export default function TempContainer({ weatherData, isCelsius }) {
         <div className={["d-flex justify-content-between", styles.tempStyles].join(" ")}>
           <div>Feels like:</div>
           <div>{isCelsius ? (
-            <span>{weatherData.current.feelslike_c}&#8451;</span>
+            <span>{feelslikeC}&#8451;</span>
           ) : (
-            <span>{weatherData.current.feelslike_f}&#8457;</span>
+            <span>{feelslikeF}&#8457;</span>
           )}</div>
         </div>
         <div className={["d-flex justify-content-between", styles.tempStyles].join(" ")}>
           <div>Avg temp:</div>
           <div>{isCelsius ? (
-            <span>{ avgTemp }&#8451;</span>
+            <span>{ avgTempC }&#8451;</span>
           ) : (
-              <span>{ avgTemp }&#8457;</span>
+              <span>{ avgTempF }&#8457;</span>
           )}</div>
         </div>
         <div className={["d-flex justify-content-between", styles.tempStyles].join(" ")}>
           <div>H/L:</div>
           <div>
             {isCelsius ? (
-              <span>{today.day.maxtemp_c} | {today.day.mintemp_c}&#8451;</span>
+              <span>{Math.round(maxTempC)} | {Math.round(minTempC)}&#8451;</span>
             ) : (
-              <span>{today.day.maxtemp_f} | {today.day.mintemp_f}&#8457;</span>
+              <span>{Math.round(maxTempF)} | {Math.round(minTempF)}&#8457;</span>
             )}
           </div>
         </div>

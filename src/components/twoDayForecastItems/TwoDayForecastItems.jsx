@@ -1,6 +1,8 @@
 import styles from './TwoDayForecastItems.module.css';
 
-export default function TwoDayForecastItems({ date, temp, imgSrc, isCelsius }) {
+export default function TwoDayForecastItems({ date, imgSrc, tempC, tempF, isCelsius }) {
+
+  const avgTemp = isCelsius ? Math.round(tempC) : Math.round(tempF);
 
   // Parse the date string into a Date object
   let dateObj = new Date(date);
@@ -18,9 +20,9 @@ export default function TwoDayForecastItems({ date, temp, imgSrc, isCelsius }) {
         <div className="fs-3">{formattedDate}</div>
         <div className="fs-3">{
           isCelsius ? (
-            <span>{temp}&#8451;</span>
+            <span>{avgTemp}&#8451;</span>
           ) : (
-              <span>{temp}&#8457;</span>
+              <span>{avgTemp}&#8457;</span>
         )}</div>
         <div>
           <img src={imgSrc} alt="Weather icon" className={styles.weatherImg} />

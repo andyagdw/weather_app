@@ -2,7 +2,7 @@ import HourlyForecastItems from '../hourlyForecastItems/HourlyForecastItems'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faClock } from '@fortawesome/free-solid-svg-icons/faClock'
 
-export default function HourlyForecastContainer({ weatherData, isCelsius }) {
+export default function HourlyForecastContainer({ weatherData, isCelsius, setErrorMessage }) {
   return (
     <>
         <div className="row border-top mt-3 pt-3">
@@ -13,7 +13,7 @@ export default function HourlyForecastContainer({ weatherData, isCelsius }) {
                 </h3>
             </div>
         </div>
-        <HourlyForecastItems weatherData={weatherData} isCelsius={isCelsius} />
+        <HourlyForecastItems weatherData={weatherData} isCelsius={isCelsius} setErrorMessage={setErrorMessage} />
     </>
   )
 }

@@ -1,8 +1,12 @@
 import styles from './WindSunsetContainer.module.css'
 
-export default function WindSunsetContainer({ weatherData }) {
+export default function WindSunsetContainer({ weatherData, setErrorMessage }) {
 
-  let today = weatherData.forecast.forecastday[0];
+  const today = weatherData.forecast.forecastday[0] ?? null;
+
+  if (!today) {
+    setErrorMessage(true)
+  }
 
   return (
     <div className="row mt-3">

@@ -77,7 +77,7 @@ export default function App() {
   return (
     <>
       <SearchBar cityName={cityName} search={search} setCityName={setCityName} errorMessage={errorMessage} />
-      { weatherData && !errorMessage && <WeatherContainer weatherData={weatherData} />}
+      { weatherData && !errorMessage && <WeatherContainer weatherData={weatherData} errorMessage={errorMessage} setErrorMessage={setErrorMessage} />}
     </>
   )
 }

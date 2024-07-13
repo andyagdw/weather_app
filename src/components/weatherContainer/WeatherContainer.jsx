@@ -6,7 +6,7 @@ import WeatherFooter from '../weatherFooter/WeatherFooter'
 import { useState } from 'react'
 import { images } from '../../assets/images'
 
-export default function WeatherContainer({ weatherData }) {
+export default function WeatherContainer({ weatherData, setErrorMessage }) {
 
   const [isCelsius, setIsCelsius] = useState(true)
 
@@ -14,7 +14,6 @@ export default function WeatherContainer({ weatherData }) {
     setIsCelsius(!isCelsius);
   };
 
-  const weatherDataTxt = weatherData.current.condition.text;
   const weatherDataCode = weatherData.current.condition.code;
 
   let backgroundImgUrl = '';
@@ -44,17 +43,21 @@ export default function WeatherContainer({ weatherData }) {
             isCelsius={isCelsius}
             setIsCelsius={setIsCelsius}
             onBtnClick={handleClick}
-            weatherDataTxt={weatherDataTxt}
+            setErrorMessage={setErrorMessage}
           />
           <HourlyForecastContainer
             weatherData={weatherData}
             isCelsius={isCelsius}
+            setErrorMessage={setErrorMessage}
           />
           <TwoDayForecastContainer
             weatherData={weatherData}
             isCelsius={isCelsius}
+            setErrorMessage={setErrorMessage}
           />
-          <WeatherFooter weatherData={weatherData} isCelsius={isCelsius} />
+          <WeatherFooter weatherData={weatherData}
+            isCelsius={isCelsius}
+            setErrorMessage={setErrorMessage} />
         </div>
       </div>
     </div>
