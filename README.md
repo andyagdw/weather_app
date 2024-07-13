@@ -5,7 +5,7 @@ The Weather App is a simple and user-friendly application built using React and 
 including hourly and daily forecasts, temperature metrics, and wind data. Users can easily switch
 between Celsius and Fahrenheit for their temperature readings.
 
-## Features ⭐
+## Features ✨
 
 * **Hourly Forecast**: View the temperature for the next 20 hours.
 * **Two Day Forecast**: See the temperature forecast for the next 2 days.
