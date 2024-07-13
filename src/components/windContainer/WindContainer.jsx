@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export default function WindContainer({ weatherData}) {
   return (
-    <div className="col-md-5 border p-3 colContainer">
+    <div className="col-xl-5 border p-3 colContainer">
       <h4 className="weatherHeadings mb-3">
         Wind
         <span className="d-inline-block ms-1">

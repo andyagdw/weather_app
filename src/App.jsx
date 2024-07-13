@@ -20,17 +20,29 @@ export default function App() {
   const search = async (city) => {  // Fetch weather data
     try {
       // 'days=3' means get a 3 day forecast including the current day
-      let url = `https://weatherapi-com.p.rapidapi.com/forecast.json?q=${city}&days=3`;
-      let response = await fetch(url, options);
+      const url = `https://weatherapi-com.p.rapidapi.com/forecast.json?q=${city}&days=3`;
+      const response = await fetch(url, options);
+
+      // console.log(response)
 
       if (!response.ok) {  // Ensure that HTTP errors are caught and handled in the try block
         // Fetch function only throws an error if there is a network error. It ignores HTTP errors like 404 or 500
         throw new Error(`HTTP error! status: ${response.status}`);
       }
 
-      let data = await response.json();
-      setWeatherData(data);
-      setCityName("");
+      const data = await response.json();
+
+      if (
+        data.location &&
+        data.current &&
+        data.current.condition &&
+        data.forecast &&
+        data.forecast.forecastday &&
+        data.forecast.forecastday.length === 3
+      ) {
+        setWeatherData(data);
+        setCityName("");
+      }
 
       if (errorMessage) {
         setErrorMessage(false);

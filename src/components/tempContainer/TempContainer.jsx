@@ -8,7 +8,7 @@ export default function TempContainer({ weatherData, isCelsius }) {
     const avgTemp = isCelsius ? today.day.avgtemp_c : today.day.avgtemp_f;
 
   return (
-    <div className="col-md-5 border p-3 colContainer">
+    <div className="col-xl-5 border p-3 colContainer">
         <h4 className="weatherHeadings mb-3">
           Temperature
           <span className='d-inline-block ms-1'><FontAwesomeIcon icon={faTemperatureThreeQuarters} /></span>
