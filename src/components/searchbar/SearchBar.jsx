@@ -12,7 +12,7 @@ export default function SearchBar({ cityName, setCityName, search}) {
 
     const handleSubmit = (e, city) => {
         e.preventDefault();
-        if (city) {  // Check if the input is not empty
+        if (city.trim()) {  // Check if the input is not empty
             if (noInput) {
                 setNoInput(false)
             }
