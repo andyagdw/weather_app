@@ -22,7 +22,8 @@ Searchbar:
 
 City Weather Information:
 
-![Screenshot 2024-07-13 142511](https://github.com/user-attachments/assets/b7947f83-06be-42e0-a94d-e3a15542def7)
+![Screenshot 2024-07-14 180725](https://github.com/user-attachments/assets/73c85c47-04e0-42c7-9cef-85e85196f16f)
+
 
 ## Getting Started ✅
 
