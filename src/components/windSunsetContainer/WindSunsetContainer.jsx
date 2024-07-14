@@ -11,7 +11,7 @@ const WindSunsetContainer = memo(function WindSunsetContainer() {
     if (today === null) {
       setErrorMessage(true);
     }
-  }, [weatherData, setErrorMessage, errorMessage]);
+  }, [weatherData, errorMessage]);
 
   return (
     <div className="row mt-3">
@@ -28,4 +28,4 @@ const WindSunsetContainer = memo(function WindSunsetContainer() {
   );
 })
 
-export default WindSunsetContainer
+export default WindSunsetContainer;

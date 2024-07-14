@@ -21,7 +21,7 @@ const WindContainer = memo(function WindContainer() {
     ) {
       setErrorMessage(true)
     }
-  }, [weatherData, setErrorMessage, errorMessage])
+  }, [weatherData, errorMessage])
 
   return (
     <div className="col-xl-5 border p-3 colContainer">
@@ -31,18 +31,18 @@ const WindContainer = memo(function WindContainer() {
           <FontAwesomeIcon icon={faWind} />
         </span>
       </h4>
-      {windMph !== null && <p className="fs-4">
+      <p className="fs-4">
         {Math.round(windMph)}
         <sup>
           <span className={styles.spanSuperScript}>MPH</span>
         </sup>
-      </p>}
-      {windDirection !== null && <p className="fs-4">
+      </p>
+      <p className="fs-4">
         {windDirection}
         <sup>
           <span className={styles.spanSuperScript}>Direction</span>
         </sup>
-      </p>}
+      </p>
     </div>
   );
 });

@@ -37,7 +37,7 @@ const TempContainer = memo(function TempContainer() {
     ) {
       setErrorMessage(true);
     }
-  }, [weatherData, isCelsius, setErrorMessage, errorMessage]);
+  }, [weatherData, isCelsius, errorMessage]);
   
   return (
   <div className="col-xl-5 border p-3 colContainer">

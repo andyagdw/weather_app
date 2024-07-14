@@ -25,7 +25,6 @@ const HourlyForecastItems = memo(function HourlyForecastItems() {
           )
         ) {
           setErrorMessage(true);
-          return;
         }
       }
     }
@@ -42,7 +41,7 @@ const HourlyForecastItems = memo(function HourlyForecastItems() {
     ) {
       setErrorMessage(true);
     }
-  }, [weatherData, isCelsius, setErrorMessage, errorMessage]);
+  }, [weatherData, isCelsius, errorMessage]);
 
     const numOfItemsToShow = 20; // Number of hours to show in the carousel
     const weatherDataNext12Hours = [];
@@ -55,8 +54,8 @@ const HourlyForecastItems = memo(function HourlyForecastItems() {
     let firstTime = true; // If it is the first time iterating through tomorrow's data
 
     for (let i = 0; i < numOfItemsToShow; i++) {
-      if (hoursAfterCurrentHourUpTo23 > 22) {
-        // If hoursAfterCurrentHourUpTo23 is 23 (23:00pm), start again from 0 (00:00am)
+      if (hoursAfterCurrentHourUpTo23 > 22 || currentHour === 23) {
+        // If hoursAfterCurrentHourUpTo23 is 23 (23:00pm) or time is 23:00pm, start from 00:00am
         if (!firstTime) {
           count++;
           let hourData = hourlyForecastTomorrowData.at(count);

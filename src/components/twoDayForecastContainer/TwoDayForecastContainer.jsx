@@ -38,7 +38,7 @@ const TwoDayForecastContainer = memo(function TwoDayForecastContainer() {
     ) {
       setErrorMessage(true)
     }
-  }, [weatherData, isCelsius, setErrorMessage, errorMessage])
+  }, [weatherData, isCelsius, errorMessage])
 
   return (
     <div className="row py-3">

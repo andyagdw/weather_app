@@ -46,26 +46,26 @@ const WeatherHeader = memo(function WeatherHeader() {
     ) {
       setErrorMessage(true)
     }
-  }, [weatherData, setErrorMessage, errorMessage, isCelsius])
+  }, [weatherData, errorMessage, isCelsius])
   
   return (
     <div className="row">
       <div className="col-lg-12 py-3 text-center colContainer">
-          {tempC !== null && tempF !== null && <h1 className="display-3">
+          <h1 className="display-3">
             {isCelsius ? (
               <span>{Math.round(tempC)}&#8451;</span>
             ) : (
               <span>{Math.round(tempF)}&#8457;</span>
             )}
-          </h1>}
-          {city !== null && country !== null && <h2 className="h4">
+          </h1>
+          <h2 className="h4">
             {city} | {country}
-          </h2>}
-          {lastUpdated !== null && <p className="fw-light mb-0">Last updated: {lastUpdated}</p>}
-          {localTime !== null && <p className="fw-light">Local time: {localTime}</p>}
-          {text !== null && <p>
+          </h2>
+          <p className="fw-light mb-0">Last updated: {lastUpdated}</p>
+          <p className="fw-light">Local time: {localTime}</p>
+          <p>
             <small>{text}</small>
-          </p>}
+          </p>
           <button
             onClick={handleClick}
             className={["px-3", styles.tempScalesButton].join(" ")}
@@ -77,4 +77,4 @@ const WeatherHeader = memo(function WeatherHeader() {
   );
 })
   
-export default WeatherHeader
+export default WeatherHeader;

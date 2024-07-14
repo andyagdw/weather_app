@@ -19,7 +19,7 @@ export default function WeatherContainer() {
       if (weatherDataCode === null) {
         setErrorMessage(true);
       }
-  }, [weatherData, setErrorMessage, errorMessage]);
+  }, [weatherData, errorMessage]);
 
   const backgroundImgUrl = useMemo(() => {
     for (let i = 0; i < weatherDataJson.length; i++) {
@@ -33,7 +33,7 @@ export default function WeatherContainer() {
   return (
     <div className="container-md mt-5" role="main">
       <div className="row">
-        {weatherDataCode != null && <div
+        <div
           className="col-lg-4 mx-auto border rounded"
           style={{
             backgroundImage: `url("${backgroundImgUrl}")`,
@@ -46,7 +46,7 @@ export default function WeatherContainer() {
           <HourlyForecastContainer />
           <TwoDayForecastContainer />
           <WeatherFooter />
-        </div>}
+        </div>
       </div>
     </div>
   );
