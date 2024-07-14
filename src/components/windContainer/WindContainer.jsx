@@ -1,21 +1,27 @@
 import styles from './WindContainer.module.css'
 import { faWind } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { memo, useContext, useEffect } from 'react';
+import { AppContext } from '../../App';
 
 
-export default function WindContainer({ weatherData, setErrorMessage }) {
+const WindContainer = memo(function WindContainer() {
 
-  const weatherDataCurrentInfo = weatherData.current;
-  const windMph = weatherDataCurrentInfo.wind_mph ?? null;
-  const windDirection = weatherDataCurrentInfo.wind_dir ?? null;
-
-  if (
-    !weatherDataCurrentInfo ||
-    !windMph ||
-    !windDirection
-  ) {
-    setErrorMessage(true)
-  }
+  const { weatherData, setErrorMessage, errorMessage } = useContext(AppContext);
+  
+  const weatherDataCurrentInfo = weatherData?.current;
+  const windMph = weatherDataCurrentInfo?.wind_mph ?? null;
+  const windDirection = weatherDataCurrentInfo?.wind_dir ?? null;
+  
+  useEffect(() => {
+    if (
+      [weatherDataCurrentInfo,
+      windMph, 
+      windDirection].some(item => item === null)
+    ) {
+      setErrorMessage(true)
+    }
+  }, [weatherData, setErrorMessage, errorMessage])
 
   return (
     <div className="col-xl-5 border p-3 colContainer">
@@ -25,18 +31,20 @@ export default function WindContainer({ weatherData, setErrorMessage }) {
           <FontAwesomeIcon icon={faWind} />
         </span>
       </h4>
-      <p className="fs-4">
+      {windMph !== null && <p className="fs-4">
         {Math.round(windMph)}
         <sup>
           <span className={styles.spanSuperScript}>MPH</span>
         </sup>
-      </p>
-      <p className="fs-4">
+      </p>}
+      {windDirection !== null && <p className="fs-4">
         {windDirection}
         <sup>
           <span className={styles.spanSuperScript}>Direction</span>
         </sup>
-      </p>
+      </p>}
     </div>
   );
-}
+});
+
+export default WindContainer;

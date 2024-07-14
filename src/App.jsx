@@ -1,13 +1,15 @@
-import { useEffect, useState } from 'react'
+import { createContext, useCallback, useEffect, useMemo, useState } from 'react'
 import SearchBar from './components/searchbar/SearchBar'
 import WeatherContainer from './components/weatherContainer/WeatherContainer'
+
+export const AppContext = createContext(null);  // Store App state variables here
 
 export default function App() {
   
   const [cityName, setCityName] = useState("")
   const [weatherData, setWeatherData] = useState(null)
   const [errorMessage, setErrorMessage] = useState(false)
-
+  const [isCelsius, setIsCelsius] = useState(true);
 
   const options = {  // Options for WeatherAPI.com
     method: 'GET',
@@ -17,7 +19,7 @@ export default function App() {
     }
   };
 
-  const search = async (city) => {  // Fetch weather data
+  const search = useCallback(async (city) => {  // Fetch weather data
     try {
       // 'days=3' means get a 3 day forecast including the current day
       const url = `https://weatherapi-com.p.rapidapi.com/forecast.json?q=${city}&days=3`;
@@ -30,7 +32,11 @@ export default function App() {
 
       const data = await response.json();
 
-      if (
+      if (errorMessage) {  // Check if there was an error message from previous calls. If so, set it to false
+        setErrorMessage(false);
+      }
+
+      if (  // Check if all data was sent from API
         data.location &&
         data.current &&
         data.current.condition &&
@@ -42,16 +48,15 @@ export default function App() {
       ) {
         setWeatherData(data);
         setCityName("");
+      } else {
+        throw new Error("All data was not sent");
       }
 
-      if (errorMessage) {
-        setErrorMessage(false);
-      }
     } catch (error) {
       setErrorMessage(true);
       setCityName("");
     }
-  }
+  }, [cityName, isCelsius]);
 
   useEffect(() => {  // Get user location
     if (navigator.geolocation) {  // Check if geolocation is supported
@@ -73,11 +78,26 @@ export default function App() {
     }
   }, [])
 
+  const memoizedContextValue = useMemo(
+    () => ({
+      weatherData,
+      errorMessage,
+      setErrorMessage,
+      isCelsius,
+      setIsCelsius,
+    }),
+    [weatherData,
+      errorMessage,
+      setErrorMessage,
+      isCelsius,
+      setIsCelsius,
+      ]
+  );
 
   return (
-    <>
-      <SearchBar cityName={cityName} search={search} setCityName={setCityName} errorMessage={errorMessage} />
-      { weatherData && !errorMessage && <WeatherContainer weatherData={weatherData} errorMessage={errorMessage} setErrorMessage={setErrorMessage} />}
-    </>
+    <AppContext.Provider value={memoizedContextValue}>
+      <SearchBar search={search} cityName={cityName} setCityName={setCityName} />
+      {weatherData && !errorMessage && <WeatherContainer />}
+    </AppContext.Provider>
   )
 }

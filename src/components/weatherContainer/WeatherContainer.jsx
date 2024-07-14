@@ -3,33 +3,37 @@ import weatherDataJson from '../../weatherData.json'
 import HourlyForecastContainer from '../hourlyForecastContainer/HourlyForecastContainer'
 import TwoDayForecastContainer from '../twoDayForecastContainer/TwoDayForecastContainer'
 import WeatherFooter from '../weatherFooter/WeatherFooter'
-import { useState } from 'react'
 import { images } from '../../assets/images'
+import { useEffect, useContext, useMemo } from 'react'
+import { AppContext } from '../../App'
 
-export default function WeatherContainer({ weatherData, setErrorMessage }) {
+export default function WeatherContainer() {
 
-  const [isCelsius, setIsCelsius] = useState(true)
+  const { weatherData, setErrorMessage, errorMessage } = useContext(AppContext);
+  
+  const weatherDataCode = useMemo(() => {
+    return weatherData?.current?.condition?.code ?? null;
+  }, [weatherData])
 
-  const handleClick = () => {
-    setIsCelsius(!isCelsius);
-  };
+  useEffect(() => {
+      if (weatherDataCode === null) {
+        setErrorMessage(true);
+      }
+  }, [weatherData, setErrorMessage, errorMessage]);
 
-  const weatherDataCode = weatherData.current.condition.code;
-
-  let backgroundImgUrl = '';
-
-  for (let i = 0; i < weatherDataJson.length; i++) {
-    if (weatherDataCode == weatherDataJson[i].code) {
-      let imgKey = weatherDataJson[i].imageKey;
-      backgroundImgUrl = images[imgKey];
-      break;
+  const backgroundImgUrl = useMemo(() => {
+    for (let i = 0; i < weatherDataJson.length; i++) {
+      if (weatherDataCode == weatherDataJson[i].code) {
+        let imgKey = weatherDataJson[i].imageKey;
+        return images[imgKey];
+      }
     }
-  }
+  }, [weatherDataCode])
 
   return (
     <div className="container-md mt-5" role="main">
       <div className="row">
-        <div
+        {weatherDataCode != null && <div
           className="col-lg-4 mx-auto border rounded"
           style={{
             backgroundImage: `url("${backgroundImgUrl}")`,
@@ -38,27 +42,11 @@ export default function WeatherContainer({ weatherData, setErrorMessage }) {
             backgroundPosition: "center",
           }}
         >
-          <WeatherHeader
-            weatherData={weatherData}
-            isCelsius={isCelsius}
-            setIsCelsius={setIsCelsius}
-            onBtnClick={handleClick}
-            setErrorMessage={setErrorMessage}
-          />
-          <HourlyForecastContainer
-            weatherData={weatherData}
-            isCelsius={isCelsius}
-            setErrorMessage={setErrorMessage}
-          />
-          <TwoDayForecastContainer
-            weatherData={weatherData}
-            isCelsius={isCelsius}
-            setErrorMessage={setErrorMessage}
-          />
-          <WeatherFooter weatherData={weatherData}
-            isCelsius={isCelsius}
-            setErrorMessage={setErrorMessage} />
-        </div>
+          <WeatherHeader />
+          <HourlyForecastContainer />
+          <TwoDayForecastContainer />
+          <WeatherFooter />
+        </div>}
       </div>
     </div>
   );

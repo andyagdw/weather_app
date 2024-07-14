@@ -1,12 +1,12 @@
 import WindContainer from '../windContainer/WindContainer';
 import TempContainer from '../tempContainer/TempContainer';
 
-export default function WindTempContainer({ weatherData, isCelsius, setErrorMessage }) {
+export default function WindTempContainer() {
 
   return (
     <div className="row d-flex justify-content-around mt-3">
-      <WindContainer weatherData={weatherData} setErrorMessage={setErrorMessage} />
-      <TempContainer weatherData={weatherData} isCelsius={isCelsius} setErrorMessage={setErrorMessage} />
+      <WindContainer />
+      <TempContainer />
     </div>
   );
 }

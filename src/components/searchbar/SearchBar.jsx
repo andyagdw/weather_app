@@ -1,10 +1,12 @@
 import styles from './SearchBar.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { AppContext } from '../../App';
+import { useContext, useState } from "react";
 
-import { useState } from "react";
+export default function SearchBar({ cityName, setCityName, search}) {
 
-export default function SearchBar({ cityName, search, setCityName, errorMessage }) {
+    const { errorMessage } = useContext(AppContext);
 
     const [noInput, setNoInput] = useState(false)  // A boolean that represents whether a city name was given
 
@@ -17,7 +19,6 @@ export default function SearchBar({ cityName, search, setCityName, errorMessage 
             search(city);
         } else {
             setNoInput(true)
-            // return
         }
     }
 

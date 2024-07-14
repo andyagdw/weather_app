@@ -1,4 +1,7 @@
-export default function HourlyForecastItem({ icon, temp, hour, isCelsius}) {
+import { memo } from "react";
+
+const HourlyForecastItem = memo(function HourlyForecastItem({ icon, temp, hour, isCelsius }) {
+
   return (
     <div className="d-inline-block">
       <div className="text-center">{hour}</div>
@@ -14,4 +17,6 @@ export default function HourlyForecastItem({ icon, temp, hour, isCelsius}) {
       </div>
     </div>
   );
-}
+})
+
+export default HourlyForecastItem;

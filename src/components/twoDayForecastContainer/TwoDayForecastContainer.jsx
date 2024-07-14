@@ -1,36 +1,44 @@
 import TwoDayForecastItems from "../twoDayForecastItems/TwoDayForecastItems"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendar } from "@fortawesome/free-solid-svg-icons";
+import { memo, useContext, useEffect } from "react";
+import { AppContext } from "../../App";
 
-export default function TwoDayForecastContainer({ weatherData, isCelsius, setErrorMessage }) {
+const TwoDayForecastContainer = memo(function TwoDayForecastContainer() {
 
-  const weatherDataForecastdayInfo = weatherData.forecast.forecastday;
+  const { weatherData, isCelsius, setErrorMessage, errorMessage } = useContext(AppContext)
 
-  const tomorrow = weatherDataForecastdayInfo[1] ?? null;
-  const dayAfterTomorrow = weatherDataForecastdayInfo[2] ?? null;
-  const tomorrowDate = tomorrow.date ?? null;
-  const tomorrowWeatherIcon = tomorrow.day.condition.icon ?? null;
-  const dayAfterTomorrowDate = dayAfterTomorrow.date ?? null;
-  const dayAfterTomorrowWeatherIcon = dayAfterTomorrow.day.condition.icon ?? null;
-  const avgTempTomorrowC = weatherDataForecastdayInfo[1].day.avgtemp_c ?? null;
-  const avgTempTomorrowF = weatherDataForecastdayInfo[1].day.avgtemp_f ?? null;
-  const avgTempDayAfterTomorrowC = weatherDataForecastdayInfo[2].day.avgtemp_c ?? null;
-  const avgTempDayAfterTomorrowF = weatherDataForecastdayInfo[2].day.avgtemp_f ?? null;
-
-  if (
-    !tomorrow ||
-    !dayAfterTomorrow ||
-    !tomorrowDate ||
-    !tomorrowWeatherIcon ||
-    !dayAfterTomorrowDate ||
-    !dayAfterTomorrowWeatherIcon ||
-    !avgTempTomorrowC ||
-    !avgTempTomorrowF ||
-    !avgTempDayAfterTomorrowC ||
-    !avgTempDayAfterTomorrowF
-  ) {
-    setErrorMessage(true)
-  }
+  const weatherDataForecastdayInfo = weatherData?.forecast?.forecastday ?? null;
+  
+  const tomorrow = weatherDataForecastdayInfo?.[1] ?? null;
+  const dayAfterTomorrow = weatherDataForecastdayInfo?.[2] ?? null;
+  const tomorrowDate = tomorrow?.date ?? null;
+  const tomorrowWeatherIcon = tomorrow?.day?.condition?.icon ?? null;
+  const dayAfterTomorrowDate = dayAfterTomorrow?.date ?? null;
+  const dayAfterTomorrowWeatherIcon = dayAfterTomorrow?.day?.condition?.icon ?? null;
+  const avgTempTomorrowC = weatherDataForecastdayInfo?.[1]?.day?.avgtemp_c ?? null;
+  const avgTempTomorrowF = weatherDataForecastdayInfo?.[1]?.day?.avgtemp_f ?? null;
+  const avgTempDayAfterTomorrowC = weatherDataForecastdayInfo?.[2]?.day?.avgtemp_c ?? null;
+  const avgTempDayAfterTomorrowF = weatherDataForecastdayInfo[2]?.day?.avgtemp_f ?? null;
+  
+  useEffect(() => {
+    if (
+      [
+        tomorrow,
+        dayAfterTomorrow,
+        tomorrowDate,
+        tomorrowWeatherIcon,
+        dayAfterTomorrowDate,
+        dayAfterTomorrowWeatherIcon,
+        avgTempTomorrowC,
+        avgTempTomorrowF,
+        avgTempDayAfterTomorrowC,
+        avgTempDayAfterTomorrowF
+      ].some(item => item === null)
+    ) {
+      setErrorMessage(true)
+    }
+  }, [weatherData, isCelsius, setErrorMessage, errorMessage])
 
   return (
     <div className="row py-3">
@@ -58,4 +66,6 @@ export default function TwoDayForecastContainer({ weatherData, isCelsius, setErr
       </div>
     </div>
   );
-}
+})
+  
+export default TwoDayForecastContainer;
