@@ -14,8 +14,8 @@ export default function WindSunsetContainer() {
     <div className="row mt-3">
       <div className={["col-lg-12", styles.colContainerSunset].join(" ")}>
         <div className="d-flex justify-content-evenly py-4">
-          {today && <div>Sunset: {today.astro.sunset} </div>}
-          {today && <div>Sunrise: {today.astro.sunrise} </div>}
+          {today ? <div>Sunset: {today.astro.sunset} </div> : <div>N/A</div>}
+          {today ? <div>Sunrise: {today.astro.sunrise} </div> : <div>N/A</div>}
         </div>
         <p className="text-center py-4">
           Powered by <a href="https://www.weatherapi.com/" title="Free Weather API">WeatherAPI.com</a>
