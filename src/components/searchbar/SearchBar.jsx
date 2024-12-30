@@ -1,56 +1,60 @@
-import styles from './SearchBar.module.css'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
-import { AppContext } from '../../App';
-import { useContext, useState } from "react";
+// Styles
+import styles from "./SearchBar.module.css";
+// Fontawesome
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+// Context
+import { AppContext } from "../../context/AppContext";
+// React
+import { useContext } from "react";
 
-export default function SearchBar({ cityName, setCityName, search}) {
+export default function SearchBar({ cityName, setCityName, search }) {
+  const [ , errorMessage] = useContext(AppContext);
 
-    const { errorMessage } = useContext(AppContext);
-
-    const [noInput, setNoInput] = useState(false)  // A boolean that represents whether a city name was given
-
-    const handleSubmit = (e, city) => {
-        e.preventDefault();
-        if (city.trim()) {  // Check if the input is not empty
-            if (noInput) {
-                setNoInput(false)
-            }
-            search(city);
-        } else {
-            setNoInput(true)
-        }
+  const handleSubmit = e => {
+    e.preventDefault();
+    if (cityName.trim() === "") return
+      search(cityName);
     }
 
   return (
     <div className="container-md py-5 border-bottom">
-        <div className="row">
-            <div className="col-lg-5 mx-auto colContainer">
-                <div>
-                    <form 
-                          className="w-75 mx-auto border d-flex"
-                          onSubmit={e => handleSubmit(e, cityName)}>
-                        <input 
-                            type="text"
-                            className={["w-75 p-2 ps-3", styles.input].join(" ")}
-                            id="searchbar" 
-                            name="searchbar" 
-                            value={cityName} 
-                            onChange={e => setCityName(e.target.value)} 
-                            placeholder="Enter a city..."  />
-                        <button type="submit" className={["w-25", styles.submitBtn].join(" ")}>
-                            <FontAwesomeIcon icon={faMagnifyingGlass} />
-                        </button>
-                    </form>
-                    {/* Display the below only if no city name was given */}
-                    {noInput && !errorMessage && <p className="text-center text-danger">Please enter a valid city name</p>}
-                    {/* For any errors */}
-                    {errorMessage && <p className="text-center text-danger">
-                        Error: Please check your API key, ensure the location is correct, or try again later.
-                        </p>}
-                </div>
-            </div>
+      <div className="row">
+        <div className="col-lg-5 mx-auto colContainer">
+          <div>
+            <search>
+              <form
+                className="w-75 mx-auto border d-flex"
+                onSubmit={handleSubmit}
+                aria-label="Get weather data"
+              >
+                <input
+                  type="search"
+                  className={["w-75 p-2 ps-3", styles.input].join(" ")}
+                  id="searchbar"
+                  name="q"
+                  value={cityName}
+                  onChange={e => setCityName(e.target.value)}
+                  placeholder="Enter a city name..."
+                />
+                <button
+                  type="submit"
+                  className={["w-25", styles.submitBtn].join(" ")}
+                >
+                  <FontAwesomeIcon icon={faMagnifyingGlass} />
+                </button>
+              </form>
+            </search>
+            {/* For any errors */}
+            {errorMessage && (
+              <p className="text-center text-danger">
+                Error: Please check your API key, ensure the location is
+                correct, or try again later.
+              </p>
+            )}
+          </div>
         </div>
+      </div>
     </div>
-  )
+  );
 }

@@ -1,7 +1,4 @@
-import { memo } from "react";
-
-const HourlyForecastItem = memo(function HourlyForecastItem({ icon, temp, hour, isCelsius }) {
-
+export default function HourlyForecastItem({ icon, temp, hour, isCelsius }) {
   return (
     <div className="d-inline-block">
       <div className="text-center">{hour}</div>
@@ -9,14 +6,8 @@ const HourlyForecastItem = memo(function HourlyForecastItem({ icon, temp, hour, 
         <img src={icon} alt="Weather Icon" />
       </div>
       <div className="text-center">
-        {isCelsius ? (
-          <span>{temp}&#8451;</span>
-        ) : (
-          <span>{temp}&#8457;</span>
-        )}
+        {isCelsius ? <span>{temp}&#8451;</span> : <span>{temp}&#8457;</span>}
       </div>
     </div>
-  );
-})
-
-export default HourlyForecastItem;
+  )
+}

@@ -1,27 +1,20 @@
+// Styles
 import styles from './WindContainer.module.css'
+// Font awesome
 import { faWind } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { memo, useContext, useEffect } from 'react';
-import { AppContext } from '../../App';
+// React
+import { useContext } from 'react';
+// Context
+import { AppContext } from "../../context/AppContext"
 
+export default function WindContainer() {
 
-const WindContainer = memo(function WindContainer() {
-
-  const { weatherData, setErrorMessage, errorMessage } = useContext(AppContext);
+  const [ weatherData ] = useContext(AppContext);
   
   const weatherDataCurrentInfo = weatherData?.current;
-  const windMph = weatherDataCurrentInfo?.wind_mph ?? null;
-  const windDirection = weatherDataCurrentInfo?.wind_dir ?? null;
-  
-  useEffect(() => {
-    if (
-      [weatherDataCurrentInfo,
-      windMph, 
-      windDirection].some(item => item === null)
-    ) {
-      setErrorMessage(true)
-    }
-  }, [weatherData, errorMessage])
+  const windMph = weatherDataCurrentInfo?.wind_mph;
+  const windDirection = weatherDataCurrentInfo?.wind_dir;
 
   return (
     <div className="col-xl-5 border p-3 colContainer">
@@ -45,6 +38,4 @@ const WindContainer = memo(function WindContainer() {
       </p>
     </div>
   );
-});
-
-export default WindContainer;
+}

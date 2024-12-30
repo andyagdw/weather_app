@@ -1,24 +1,21 @@
-import { memo, useContext, useEffect } from 'react';
+// React
+import { useContext } from 'react';
+// Styles
 import styles from './WindSunsetContainer.module.css'
-import { AppContext } from '../../App';
+// Context
+import { AppContext } from '../../context/AppContext';
 
-const WindSunsetContainer = memo(function WindSunsetContainer() {
-  const { weatherData, setErrorMessage, errorMessage } = useContext(AppContext);
+export default function WindSunsetContainer() {
+  const [ weatherData ] = useContext(AppContext);
   
-  const today = weatherData?.forecast?.forecastday?.[0] ?? null;
+  const today = weatherData?.forecast?.forecastday?.[0];
   
-  useEffect(() => {
-    if (today === null) {
-      setErrorMessage(true);
-    }
-  }, [weatherData, errorMessage]);
-
   return (
     <div className="row mt-3">
       <div className={["col-lg-12", styles.colContainerSunset].join(" ")}>
         <div className="d-flex justify-content-evenly py-4">
-          {today !== null && <div>Sunset: {today.astro.sunset} </div>}
-          {today !== null && <div>Sunrise: {today.astro.sunrise} </div>}
+          {today && <div>Sunset: {today.astro.sunset} </div>}
+          {today && <div>Sunrise: {today.astro.sunrise} </div>}
         </div>
         <p className="text-center py-4">
           Powered by <a href="https://www.weatherapi.com/" title="Free Weather API">WeatherAPI.com</a>
@@ -26,6 +23,4 @@ const WindSunsetContainer = memo(function WindSunsetContainer() {
       </div>
     </div>
   );
-})
-
-export default WindSunsetContainer;
+}

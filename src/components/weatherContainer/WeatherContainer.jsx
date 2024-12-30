@@ -1,42 +1,40 @@
+// Components
 import WeatherHeader from '../weatherHeader/WeatherHeader'
+// Json
 import weatherDataJson from '../../weatherData.json'
+// Components
 import HourlyForecastContainer from '../hourlyForecastContainer/HourlyForecastContainer'
 import TwoDayForecastContainer from '../twoDayForecastContainer/TwoDayForecastContainer'
 import WeatherFooter from '../weatherFooter/WeatherFooter'
+// Assets
 import { images } from '../../assets/images'
-import { useEffect, useContext, useMemo } from 'react'
-import { AppContext } from '../../App'
+// React
+import { useContext } from 'react'
+// Context
+import { AppContext } from '../../context/AppContext'
 
 export default function WeatherContainer() {
 
-  const { weatherData, setErrorMessage, errorMessage } = useContext(AppContext);
+  const [ weatherData ] = useContext(AppContext);
   
-  const weatherDataCode = useMemo(() => {
-    return weatherData?.current?.condition?.code ?? null;
-  }, [weatherData])
+  const weatherDataCode = weatherData?.current?.condition?.code;
 
-  useEffect(() => {
-      if (weatherDataCode === null) {
-        setErrorMessage(true);
-      }
-  }, [weatherData, errorMessage]);
-
-  const backgroundImgUrl = useMemo(() => {
+  const backgroundImgUrl = () => {
     for (let i = 0; i < weatherDataJson.length; i++) {
       if (weatherDataCode == weatherDataJson[i].code) {
-        let imgKey = weatherDataJson[i].imageKey;
+        const imgKey = weatherDataJson[i].imageKey;
         return images[imgKey];
       }
     }
-  }, [weatherDataCode])
+  }
 
   return (
-    <div className="container-md mt-5" role="main">
+    <main className="container-md mt-5">
       <div className="row">
         <div
           className="col-lg-4 mx-auto border rounded"
           style={{
-            backgroundImage: `url("${backgroundImgUrl}")`,
+            backgroundImage: `url("${backgroundImgUrl()}")`,
             backgroundSize: "cover",
             backgroundRepeat: "no-repeat",
             backgroundPosition: "center",
@@ -48,6 +46,6 @@ export default function WeatherContainer() {
           <WeatherFooter />
         </div>
       </div>
-    </div>
+    </main>
   );
 }

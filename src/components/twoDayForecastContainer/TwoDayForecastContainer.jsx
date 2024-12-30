@@ -1,44 +1,29 @@
+// Components
 import TwoDayForecastItems from "../twoDayForecastItems/TwoDayForecastItems"
+// Font awesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendar } from "@fortawesome/free-solid-svg-icons";
-import { memo, useContext, useEffect } from "react";
-import { AppContext } from "../../App";
+// React
+import { useContext } from "react";
+// Context
+import { AppContext } from "../../context/AppContext";
 
-const TwoDayForecastContainer = memo(function TwoDayForecastContainer() {
+export default function TwoDayForecastContainer() {
 
-  const { weatherData, isCelsius, setErrorMessage, errorMessage } = useContext(AppContext)
+  const [ weatherData, , isCelsius ] = useContext(AppContext)
 
-  const weatherDataForecastdayInfo = weatherData?.forecast?.forecastday ?? null;
+  const weatherDataForecastdayInfo = weatherData?.forecast?.forecastday;
   
-  const tomorrow = weatherDataForecastdayInfo?.[1] ?? null;
-  const dayAfterTomorrow = weatherDataForecastdayInfo?.[2] ?? null;
-  const tomorrowDate = tomorrow?.date ?? null;
-  const tomorrowWeatherIcon = tomorrow?.day?.condition?.icon ?? null;
-  const dayAfterTomorrowDate = dayAfterTomorrow?.date ?? null;
-  const dayAfterTomorrowWeatherIcon = dayAfterTomorrow?.day?.condition?.icon ?? null;
-  const avgTempTomorrowC = weatherDataForecastdayInfo?.[1]?.day?.avgtemp_c ?? null;
-  const avgTempTomorrowF = weatherDataForecastdayInfo?.[1]?.day?.avgtemp_f ?? null;
-  const avgTempDayAfterTomorrowC = weatherDataForecastdayInfo?.[2]?.day?.avgtemp_c ?? null;
-  const avgTempDayAfterTomorrowF = weatherDataForecastdayInfo[2]?.day?.avgtemp_f ?? null;
-  
-  useEffect(() => {
-    if (
-      [
-        tomorrow,
-        dayAfterTomorrow,
-        tomorrowDate,
-        tomorrowWeatherIcon,
-        dayAfterTomorrowDate,
-        dayAfterTomorrowWeatherIcon,
-        avgTempTomorrowC,
-        avgTempTomorrowF,
-        avgTempDayAfterTomorrowC,
-        avgTempDayAfterTomorrowF
-      ].some(item => item === null)
-    ) {
-      setErrorMessage(true)
-    }
-  }, [weatherData, isCelsius, errorMessage])
+  const tomorrow = weatherDataForecastdayInfo?.[1];
+  const dayAfterTomorrow = weatherDataForecastdayInfo?.[2];
+  const tomorrowDate = tomorrow?.date;
+  const tomorrowWeatherIcon = tomorrow?.day?.condition?.icon;
+  const dayAfterTomorrowDate = dayAfterTomorrow?.date;
+  const dayAfterTomorrowWeatherIcon = dayAfterTomorrow?.day?.condition?.icon;
+  const avgTempTomorrowC = weatherDataForecastdayInfo?.[1]?.day?.avgtemp_c;
+  const avgTempTomorrowF = weatherDataForecastdayInfo?.[1]?.day?.avgtemp_f;
+  const avgTempDayAfterTomorrowC = weatherDataForecastdayInfo?.[2]?.day?.avgtemp_c;
+  const avgTempDayAfterTomorrowF = weatherDataForecastdayInfo[2]?.day?.avgtemp_f;
 
   return (
     <div className="row py-3">
@@ -66,6 +51,4 @@ const TwoDayForecastContainer = memo(function TwoDayForecastContainer() {
       </div>
     </div>
   );
-})
-  
-export default TwoDayForecastContainer;
+}

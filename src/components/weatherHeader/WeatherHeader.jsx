@@ -1,53 +1,32 @@
-import { memo, useContext, useEffect } from 'react';
+// React
+import { useContext } from 'react';
+// Styles
 import styles from './WeatherHeader.module.css'
-import { AppContext } from '../../App';
+// Context
+import { AppContext } from '../../context/AppContext';
 
-const WeatherHeader = memo(function WeatherHeader() {
+export default function WeatherHeader() {
 
-  const {
-    weatherData,
-    isCelsius,
-    setIsCelsius,
-    setErrorMessage,
-    errorMessage,
-  } = useContext(AppContext);
+  const [
+    weatherData, , isCelsius, setIsCelsius ] = useContext(AppContext);
   
   const handleClick = () => {
     setIsCelsius(prev => !prev)
   }
   
-  const weatherDataLocationInfo = weatherData?.location ?? null;
-  const city = weatherDataLocationInfo?.name ?? null;
-  const country = weatherDataLocationInfo?.country ?? null;
-  const localTime = weatherDataLocationInfo?.localtime?.split(" ")[1] ?? null;
+  const weatherDataLocationInfo = weatherData?.location;
+  const city = weatherDataLocationInfo?.name;
+  const country = weatherDataLocationInfo?.country;
+  const localTime = weatherDataLocationInfo?.localtime?.split(" ")[1];
   
-  const weatherDataCurrentInfo = weatherData?.current ?? null;
-  const lastUpdated = weatherDataCurrentInfo?.last_updated?.split(" ")[1] ?? null;
-  const tempC = weatherDataCurrentInfo?.temp_c ?? null;
-  const tempF = weatherDataCurrentInfo?.temp_f ?? null;
+  const weatherDataCurrentInfo = weatherData?.current;
+  const lastUpdated = weatherDataCurrentInfo?.last_updated?.split(" ")[1];
+  const tempC = weatherDataCurrentInfo?.temp_c;
+  const tempF = weatherDataCurrentInfo?.temp_f;
   
-  const weatherDataCurrentConditionInfo = weatherData?.current?.condition ?? null;
-  const text = weatherDataCurrentConditionInfo?.text ?? null;
+  const weatherDataCurrentConditionInfo = weatherData?.current?.condition;
+  const text = weatherDataCurrentConditionInfo?.text;
 
-  useEffect(() => {
-    if (
-      [
-        weatherDataLocationInfo,
-        city,
-        country,
-        localTime,
-        weatherDataCurrentInfo,
-        lastUpdated,
-        tempC,
-        tempF,
-        weatherDataCurrentConditionInfo,
-        text
-      ].some(item => item === null)
-    ) {
-      setErrorMessage(true)
-    }
-  }, [weatherData, errorMessage, isCelsius])
-  
   return (
     <div className="row">
       <div className="col-lg-12 py-3 text-center colContainer">
@@ -75,6 +54,4 @@ const WeatherHeader = memo(function WeatherHeader() {
       </div>
     </div>
   );
-})
-  
-export default WeatherHeader;
+}

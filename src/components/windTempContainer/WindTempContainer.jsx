@@ -1,3 +1,4 @@
+// Components
 import WindContainer from '../windContainer/WindContainer';
 import TempContainer from '../tempContainer/TempContainer';
 

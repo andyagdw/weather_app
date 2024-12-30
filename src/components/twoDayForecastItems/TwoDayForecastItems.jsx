@@ -1,22 +1,25 @@
-import { memo, useContext } from 'react';
+// React
+import { useContext } from 'react';
+// Styles
 import styles from './TwoDayForecastItems.module.css';
-import { AppContext } from '../../App';
+// Context
+import { AppContext } from '../../context/AppContext';
 
-const TwoDayForecastItems = memo(function TwoDayForecastItems({ date, tempC, tempF, imgSrc }) {
+export default function TwoDayForecastItems({ date, tempC, tempF, imgSrc }) {
 
-  const { isCelsius } = useContext(AppContext)
+  const [ , , isCelsius ] = useContext(AppContext)
 
   const avgTemp = isCelsius ? Math.round(tempC) : Math.round(tempF);
   
   // Parse the date string into a Date object
-  let dateObj = new Date(date);
+  const dateObj = new Date(date);
   
   // Extract day and month
-  let currentDay = dateObj.getDate();
-  let currentMonth = dateObj.getMonth() + 1;  // Months are zero-indexed
+  const currentDay = dateObj.getDate();
+  const currentMonth = dateObj.getMonth() + 1;  // Months are zero-indexed
   
   // Format into 'dd / mm'
-  let formattedDate = `${currentDay} / ${currentMonth}`;
+  const formattedDate = `${currentDay} / ${currentMonth}`;
   
   return (
     <div className="col-lg-12 mt-2">
@@ -34,6 +37,4 @@ const TwoDayForecastItems = memo(function TwoDayForecastItems({ date, tempC, tem
       </div>
     </div>
   );
-})
-
-export default TwoDayForecastItems;
+}
