@@ -54,13 +54,13 @@ export default function App() {
     if (navigator.geolocation) {
       // Request user location
       navigator.geolocation.getCurrentPosition(
-        (position) => {
+        position => {
           // User allowed access
           const coords = `${position.coords.latitude},${position.coords.longitude}`
           setCityName(coords)
           search(coords)
         },
-        (err) => {
+        err => {
           // User denied access or another error occured
           console.log(err)
         }
@@ -71,7 +71,7 @@ export default function App() {
     }
   }, [])
 
-  const appContext = [weatherData, errorMessage, isCelsius, setIsCelsius]
+  const appContext = { weatherData, errorMessage, isCelsius, setIsCelsius }
 
   return (
     <AppContext value={appContext}>

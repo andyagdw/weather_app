@@ -7,8 +7,7 @@ import { AppContext } from '../../context/AppContext';
 
 export default function WeatherHeader() {
 
-  const [
-    weatherData, , isCelsius, setIsCelsius ] = useContext(AppContext);
+  const { weatherData, isCelsius, setIsCelsius } = useContext(AppContext);
   
   const handleClick = () => {
     setIsCelsius(prev => !prev)

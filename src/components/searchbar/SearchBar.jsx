@@ -9,13 +9,14 @@ import { AppContext } from "../../context/AppContext";
 import { useContext } from "react";
 
 export default function SearchBar({ cityName, setCityName, search }) {
-  const [ , errorMessage] = useContext(AppContext);
+  const { errorMessage } = useContext(AppContext);
 
   const handleSubmit = e => {
     e.preventDefault();
     if (cityName.trim() === "") return
       search(cityName);
-    }
+  }
+  
 
   return (
     <div className="container-md py-5 border-bottom">

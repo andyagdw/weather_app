@@ -6,7 +6,7 @@ import styles from './WindSunsetContainer.module.css'
 import { AppContext } from '../../context/AppContext';
 
 export default function WindSunsetContainer() {
-  const [ weatherData ] = useContext(AppContext);
+  const { weatherData } = useContext(AppContext);
   
   const today = weatherData?.forecast?.forecastday?.[0];
   

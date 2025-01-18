@@ -10,7 +10,7 @@ import { AppContext } from "../../context/AppContext"
 
 export default function WindContainer() {
 
-  const [ weatherData ] = useContext(AppContext);
+  const { weatherData } = useContext(AppContext);
   
   const weatherDataCurrentInfo = weatherData?.current;
   const windMph = weatherDataCurrentInfo?.wind_mph;

@@ -10,7 +10,7 @@ import { AppContext } from "../../context/AppContext"
 
 export default function TempContainer() {
 
-  const [ weatherData, , isCelsius ] = useContext(AppContext)
+  const { weatherData, isCelsius } = useContext(AppContext)
 
   const weatherDataForecastdayTodayDayInfo = weatherData?.forecast?.forecastday?.[0]?.day
   const maxTempC = weatherDataForecastdayTodayDayInfo?.maxtemp_c

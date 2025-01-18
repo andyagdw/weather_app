@@ -10,7 +10,7 @@ import { AppContext } from "../../context/AppContext";
 
 export default function TwoDayForecastContainer() {
 
-  const [ weatherData, , isCelsius ] = useContext(AppContext)
+  const { weatherData, isCelsius } = useContext(AppContext)
 
   const weatherDataForecastdayInfo = weatherData?.forecast?.forecastday;
   

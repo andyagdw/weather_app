@@ -7,7 +7,7 @@ import { AppContext } from '../../context/AppContext';
 
 export default function TwoDayForecastItems({ date, tempC, tempF, imgSrc }) {
 
-  const [ , , isCelsius ] = useContext(AppContext)
+  const { isCelsius } = useContext(AppContext)
 
   const avgTemp = isCelsius ? Math.round(tempC) : Math.round(tempF);
   

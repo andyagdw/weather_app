@@ -11,7 +11,7 @@ import { useContext } from 'react';
 import { AppContext } from "../../context/AppContext";
 
 export default function HourlyForecastItems() {
-  const [ weatherData, , isCelsius ] = useContext(AppContext);
+  const { weatherData, isCelsius } = useContext(AppContext);
 
   const localTime = weatherData?.location?.localtime;
   const weatherDataForecastDayInfo = weatherData?.forecast?.forecastday;
@@ -21,34 +21,6 @@ export default function HourlyForecastItems() {
   const tomorrowData = weatherDataForecastDayInfo?.[1];
   // An array of tomorrow's hourly forecast
   const hourlyForecastTomorrowData = tomorrowData?.hour;
-
-  // useEffect(() => {
-  //   // Check if any properties contain null values and throw error
-  //   for (const subArr of subArrays) {
-  //     for (const obj in subArr) {
-  //       if (
-  //         ["hour", "temp", "icon", "time"].some(
-  //           (key) => subArr[obj][key] === null
-  //         )
-  //       ) {
-  //         setErrorMessage(true);
-  //       }
-  //     }
-  //   }
-  //   if (
-  //     // Throw error if any values are null
-  //     [
-  //       localTime,
-  //       weatherDataForecastDayInfo,
-  //       todayData,
-  //       hourlyForecastTodayData,
-  //       tomorrowData,
-  //       hourlyForecastTomorrowData,
-  //     ].some((item) => item === null)
-  //   ) {
-  //     setErrorMessage(true);
-  //   }
-  // }, [weatherData, isCelsius, errorMessage]);
 
   const numOfItemsToShow = 20; // Number of hours to show in the carousel
   const weatherDataNext12Hours = [];

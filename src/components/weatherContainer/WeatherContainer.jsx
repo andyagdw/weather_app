@@ -15,7 +15,7 @@ import { AppContext } from '../../context/AppContext'
 
 export default function WeatherContainer() {
 
-  const [ weatherData ] = useContext(AppContext);
+  const { weatherData } = useContext(AppContext);
   
   const weatherDataCode = weatherData?.current?.condition?.code;
 
