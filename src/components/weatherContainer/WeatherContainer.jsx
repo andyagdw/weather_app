@@ -1,11 +1,12 @@
 // Components
 import WeatherHeader from '../weatherHeader/WeatherHeader'
-// Json
-import weatherDataJson from '../../weatherData.json'
-// Components
 import HourlyForecastContainer from '../hourlyForecastContainer/HourlyForecastContainer'
 import TwoDayForecastContainer from '../twoDayForecastContainer/TwoDayForecastContainer'
-import WeatherFooter from '../weatherFooter/WeatherFooter'
+import WindSunsetContainer from "../windSunsetContainer/WindSunsetContainer"
+import WindContainer from "../windContainer/WindContainer"
+import TempContainer from "../tempContainer/TempContainer"
+// Json
+import weatherDataJson from '../../weatherData.json'
 // Assets
 import { images } from '../../assets/images'
 // React
@@ -43,7 +44,11 @@ export default function WeatherContainer() {
           <WeatherHeader />
           <HourlyForecastContainer />
           <TwoDayForecastContainer />
-          <WeatherFooter />
+          <div className="row d-flex justify-content-around mt-3">
+            <WindContainer />
+            <TempContainer />
+          </div>
+          <WindSunsetContainer />
         </div>
       </div>
     </main>
