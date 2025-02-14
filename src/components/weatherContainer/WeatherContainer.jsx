@@ -32,7 +32,7 @@ export default function WeatherContainer() {
     <main className="container-md mt-5">
       <div className="row">
         <div
-          className="col-lg-4 mx-auto border rounded"
+          className="col-lg-6 mx-auto border rounded"
           style={{
             backgroundImage: `url("${backgroundImgUrl()}")`,
             backgroundSize: "cover",

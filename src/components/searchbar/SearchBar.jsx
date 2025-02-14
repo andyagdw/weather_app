@@ -16,7 +16,6 @@ export default function SearchBar({ cityName, setCityName, search }) {
     if (cityName.trim() === "") return
       search(cityName);
   }
-  
 
   return (
     <div className="container-md py-5 border-bottom">
@@ -31,6 +30,7 @@ export default function SearchBar({ cityName, setCityName, search }) {
               >
                 <input
                   type="search"
+                  inputMode="search"
                   className={["w-75 p-2 ps-3", styles.input].join(" ")}
                   id="searchbar"
                   name="q"
