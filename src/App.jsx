@@ -41,6 +41,7 @@ export default function App() {
         throw new Error("All data was not sent")
       }
     } catch (e) {
+      console.error("There was an error", e)
       setErrorMessage(
         "There was an error fetching the data. Please try again later"
       )
@@ -60,9 +61,9 @@ export default function App() {
           setCityName(coords)
           search(coords)
         },
-        err => {
+        e => {
           // User denied access or another error occured
-          console.log(err)
+          console.error("There was an error", e)
         }
       )
     } else {
